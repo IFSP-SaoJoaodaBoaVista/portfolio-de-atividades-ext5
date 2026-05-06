@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operação Aquapura — Portfólio IFSP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ocean-deep: #0a2342;
+      --ocean-mid: #0d4f6e;
+      --ocean-teal: #00b4d8;
+      --ocean-foam: #90e0ef;
+      --ocean-light: #caf0f8;
+      --sand: #f5ede3;
+      --coral: #ff6b6b;
+      --gold: #f4c542;
+      --white: #ffffff;
+      --text-dark: #0a2342;
+      --text-mid: #1a4a6e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--ocean-deep);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(10, 35, 66, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--ocean-foam);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--ocean-teal);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0, 180, 216, 0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 80% at 20% 80%, rgba(13, 79, 110, 0.5) 0%, transparent 60%);
+    }
+
+    /* bubbles bg */
+    .bubbles-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 180, 216, 0.3);
+      animation: float-up linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes float-up {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.5;
+      }
+
+      90% {
+        opacity: 0.2;
+      }
+
+      100% {
+        transform: translateY(-110vh) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    /* animated waves */
+    .waves-bg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 C150,100 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z' fill='%230d4f6e'/%3E%3C/svg%3E") repeat-x bottom;
+      background-size: 50% 100%;
+      animation: wave-anim 8s linear infinite;
+      opacity: 0.6;
+    }
+
+    .wave:nth-child(2) {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,80 C200,20 400,100 600,50 C800,0 1000,90 1200,60 L1200,120 L0,120 Z' fill='%2300b4d8'/%3E%3C/svg%3E");
+      animation-duration: 12s;
+      animation-direction: reverse;
+      opacity: 0.3;
+    }
+
+    @keyframes wave-anim {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ocean-teal);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--ocean-teal);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1.05;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--ocean-foam);
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.85rem 2rem;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--ocean-teal);
+      color: var(--ocean-deep);
+    }
+
+    .btn-primary:hover {
+      background: var(--ocean-foam);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--ocean-teal);
+      color: var(--ocean-teal);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 4rem;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--ocean-teal), transparent);
+      animation: scroll-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scroll-pulse {
+
+      0%,
+      100% {
+        opacity: 0.3
+      }
+
+      50% {
+        opacity: 1
+      }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 6rem 4rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ocean-teal);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--ocean-teal);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── OBJETIVO ── */
+    #objetivo {
+      background: var(--sand);
+      color: var(--text-dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #objetivo::after {
+      content: 'A';
+      position: absolute;
+      right: -2rem;
+      bottom: -4rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 22rem;
+      font-weight: 900;
+      color: rgba(0, 180, 216, 0.08);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .objetivo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .objetivo-text .section-label {
+      color: var(--ocean-mid);
+    }
+
+    .objetivo-text .section-label::before {
+      background: var(--ocean-mid);
+    }
+
+    .objetivo-text .section-title {
+      color: var(--text-dark);
+    }
+
+    .objetivo-text p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-mid);
+      margin-bottom: 1.2rem;
+    }
+
+    .ods-badge {
+      background: #0077b6;
+      color: #fff;
+      border-radius: 12px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .ods-badge .ods-num-big {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .ods-badge h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .ods-badge p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      line-height: 1.6;
+      max-width: 260px;
+    }
+
+    .ods-wave-icon {
+      font-size: 3rem;
+    }
+
+    /* ── GAMEPLAY ── */
+    #gameplay {
+      background: linear-gradient(135deg, var(--ocean-mid) 0%, var(--ocean-deep) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .desc-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .desc-text p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 1.2rem;
+    }
+
+    .features-list {
+      list-style: none;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .features-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 2px solid var(--ocean-teal);
+    }
+
+    .feat-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .feat-text strong {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+      color: var(--ocean-foam);
+    }
+
+    .feat-text span {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* score mockup */
+    .game-mockup {
+      background: #061218;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 180, 216, 0.3);
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .game-topbar {
+      background: rgba(0, 180, 216, 0.1);
+      border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+      padding: 0.7rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ocean-teal);
+    }
+
+    .game-screen {
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .stat-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      width: 80px;
+      flex-shrink: 0;
+    }
+
+    .stat-bar-wrap {
+      flex: 1;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .stat-bar {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    .bar-ox {
+      background: linear-gradient(90deg, #00b4d8, #90e0ef);
+      width: 65%;
+    }
+
+    .bar-pts {
+      background: linear-gradient(90deg, #f4c542, #ffb347);
+      width: 80%;
+    }
+
+    .stat-val {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--white);
+      min-width: 40px;
+      text-align: right;
+    }
+
+    .game-event {
+      margin-top: 0.5rem;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      background: rgba(0, 180, 216, 0.08);
+      border: 1px solid rgba(0, 180, 216, 0.15);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.5;
+    }
+
+    .event-good {
+      color: var(--ocean-teal);
+      font-weight: 500;
+    }
+
+    .event-bad {
+      color: var(--coral);
+      font-weight: 500;
+    }
+
+    /* ── PRODUÇÃO ── */
+    #producao {
+      background: var(--ocean-deep);
+      border-top: 1px solid rgba(0, 180, 216, 0.15);
+      border-bottom: 1px solid rgba(0, 180, 216, 0.15);
+    }
+
+    .prod-intro {
+      max-width: 600px;
+      margin-bottom: 3.5rem;
+    }
+
+    .prod-intro p {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+      margin-top: 1rem;
+    }
+
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .prod-card {
+      border-radius: 10px;
+      padding: 2rem 1.8rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(0, 180, 216, 0.15);
+      border-top: 3px solid var(--ocean-teal);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .prod-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .prod-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .prod-card h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ocean-foam);
+      margin-bottom: 0.5rem;
+    }
+
+    .prod-card p {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+    }
+
+    /* ── PÚBLICO-ALVO ── */
+    #publico {
+      background: var(--sand);
+      color: var(--text-dark);
+    }
+
+    .pub-intro .section-label {
+      color: var(--ocean-mid);
+    }
+
+    .pub-intro .section-label::before {
+      background: var(--ocean-mid);
+    }
+
+    .pub-intro .section-title {
+      color: var(--text-dark);
+    }
+
+    .pub-intro p {
+      color: var(--text-mid);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 650px;
+      margin-bottom: 2.5rem;
+    }
+
+    .pub-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+
+    .pub-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 1.8rem;
+      border-top: 3px solid var(--ocean-mid);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .pub-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .pub-tag {
+      display: inline-block;
+      background: var(--ocean-light);
+      color: var(--ocean-mid);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+
+    .pub-card h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .pub-card p {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    /* ── VÍDEO ── */
+    #video {
+      background: #061829;
+    }
+
+    .video-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .video-text p {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .video-player {
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(0, 180, 216, 0.3);
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.3s;
+      text-decoration: none;
+    }
+
+    .video-player:hover {
+      border-color: var(--ocean-teal);
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0, 180, 216, 0.1), transparent);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .play-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--ocean-teal);
+      color: var(--ocean-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 0 12px rgba(0, 180, 216, 0.15);
+    }
+
+    .video-player:hover .play-btn {
+      transform: scale(1.08);
+      box-shadow: 0 0 0 16px rgba(0, 180, 216, 0.2);
+    }
+
+    .video-caption {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .video-label {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(0, 0, 0, 0.6);
+      color: var(--ocean-teal);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #030e1c;
+      padding: 3rem 4rem;
+      border-top: 1px solid rgba(0, 180, 216, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--ocean-foam);
+    }
+
+    .footer-brand span {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-style: normal;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 0.2rem;
+    }
+
+    .footer-tags {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: rgba(0, 180, 216, 0.1);
+      color: var(--ocean-teal);
+      font-size: 0.75rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 180, 216, 0.2);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .delay-1 {
+      animation-delay: 0.15s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.3s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.45s;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav {
+        padding: 1rem 2rem;
+      }
+
+      section {
+        padding: 4rem 2rem;
+      }
+
+      .objetivo-grid,
+      .desc-grid,
+      .video-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .prod-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .pub-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 7rem 2rem 3rem;
+      }
+
+      .prod-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="nav-logo">Operação Aquapura</div>
+    <ul class="nav-links">
+      <li><a href="#objetivo">Objetivo</a></li>
+      <li><a href="#gameplay">Gameplay</a></li>
+      <li><a href="#producao">Produção</a></li>
+      <li><a href="#publico">Público-Alvo</a></li>
+      <li><a href="#video">Vídeo</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="bubbles-bg" id="bubblesContainer"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow fade-up">Projeto IFSP · ODS 14 — Vida na Água · 2026</p>
+      <h1 class="fade-up delay-1">
+        Operação<br><em>Aquapura</em>
+      </h1>
+      <p class="hero-desc fade-up delay-2">
+        Um jogo arcade desenvolvido para conscientizar sobre a poluição dos oceanos de forma intuitiva e divertida,
+        alinhado ao ODS 14 da ONU.
+      </p>
+      <div class="hero-cta fade-up delay-3">
+        <a href="#objetivo" class="btn btn-primary">Explorar Projeto</a>
+        <a href="#video" class="btn btn-outline">Ver Vídeo</a>
+      </div>
+    </div>
+    <div class="waves-bg">
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      scroll
+    </div>
+  </section>
+
+  <section id="objetivo">
+    <div class="objetivo-grid">
+      <div class="objetivo-text">
+        <p class="section-label">01 — Objetivo</p>
+        <h2 class="section-title">Com que o projeto trabalha?</h2>
+        <p>
+          O Aquapura é um projeto que trabalha com a <strong>ODS 14 — Vida na Água</strong>, agenda feita pela ONU, que
+          tem como objetivo conservar e utilizar sustentavelmente oceanos, mares e recursos marinhos.
+        </p>
+        <p>
+          O foco principal é reduzir a poluição e quaisquer danos aos mares e oceanos, traduzindo essa missão global em
+          uma experiência interativa e acessível para estudantes e educadores.
+        </p>
+      </div>
+      <div class="ods-badge">
+        <div class="ods-wave-icon">🌊</div>
+        <div class="ods-num-big">14</div>
+        <h3>Vida na Água</h3>
+        <p>Conservar e utilizar de forma sustentável os oceanos, mares e recursos marinhos para o desenvolvimento
+          sustentável.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="gameplay">
+    <div class="desc-grid">
+      <div class="desc-text">
+        <p class="section-label">02 — Gameplay</p>
+        <h2 class="section-title">Como o jogo funciona</h2>
+        <p>
+          Operação Aquapura é um <strong>arcade de scroll infinito</strong> onde um mergulhador busca melhorar a
+          situação das águas dos oceanos cheias de detritos, enquanto desvia e evita capturar a vida marinha em sua
+          rede.
+        </p>
+        <p>
+          O objetivo básico é sobreviver o máximo possível enquanto conquista a maior pontuação — um paralelo direto ao
+          desafio real da conservação marinha.
+        </p>
+        <ul class="features-list">
+          <li>
+            <span class="feat-icon">🤿</span>
+            <div class="feat-text">
+              <strong>Mecânica de Oxigênio</strong>
+              <span>O jogador perde ar gradualmente embaixo d'água e precisa voltar à superfície para
+                reabastecer.</span>
+            </div>
+          </li>
+          <li>
+            <span class="feat-icon">🗑️</span>
+            <div class="feat-text">
+              <strong>Coleta de Lixo</strong>
+              <span>Cada detrito capturado vale +1 ponto — limpar o oceano é a missão principal.</span>
+            </div>
+          </li>
+          <li>
+            <span class="feat-icon">🐠</span>
+            <div class="feat-text">
+              <strong>Proteja a Vida Marinha</strong>
+              <span>Capturar ou colidir com animais marines custa pontos e oxigênio — a biodiversidade deve ser
+                preservada.</span>
+            </div>
+          </li>
+          <li>
+            <span class="feat-icon">♾️</span>
+            <div class="feat-text">
+              <strong>Scroll Infinito</strong>
+              <span>Dificuldade progressiva que mantém o jogador engajado enquanto reforça a mensagem ambiental.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="game-mockup">
+        <div class="game-topbar">
+          <span>Operação Aquapura</span>
+          <span>● Em jogo</span>
+        </div>
+        <div class="game-screen">
+          <div class="stat-row">
+            <span class="stat-label">Oxigênio</span>
+            <div class="stat-bar-wrap">
+              <div class="stat-bar bar-ox"></div>
+            </div>
+            <span class="stat-val">65%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pontos</span>
+            <div class="stat-bar-wrap">
+              <div class="stat-bar bar-pts"></div>
+            </div>
+            <span class="stat-val">8 pts</span>
+          </div>
+          <div class="game-event">
+            <span class="event-good">+1 🗑️ Lixo coletado!</span><br>
+            <span style="color:rgba(255,255,255,0.4); font-size:0.75rem;">Continue limpando o oceano...</span>
+          </div>
+          <div class="game-event">
+            <span class="event-bad">-1 🐟 Vida marinha capturada!</span><br>
+            <span style="color:rgba(255,255,255,0.4); font-size:0.75rem;">Cuidado com os animais marinhos.</span>
+          </div>
+          <div
+            style="text-align:center; padding: 1rem 0; color: rgba(255,255,255,0.2); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;">
+            ↑ suba para respirar
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="producao">
+    <div class="prod-intro">
+      <p class="section-label">03 — Produção</p>
+      <h2 class="section-title">Como foi feito</h2>
+      <p>O projeto foi desenvolvido do zero com código, arte e música completamente originais, demonstrando domínio
+        técnico e criativo em todas as frentes de desenvolvimento.</p>
+    </div>
+    <div class="prod-grid">
+      <div class="prod-card">
+        <div class="prod-icon">💻</div>
+        <h4>Linguagem C</h4>
+        <p>Todo o motor do jogo foi escrito em C, explorando conceitos de lógica de programação, gerenciamento de estado
+          e loop de jogo em baixo nível.</p>
+      </div>
+      <div class="prod-card">
+        <div class="prod-icon">🎨</div>
+        <h4>Arte Original</h4>
+        <p>Sprites, cenários e elementos visuais criados exclusivamente para o projeto, com identidade visual coesa que
+          reforça o tema ambiental submarino.</p>
+      </div>
+      <div class="prod-card">
+        <div class="prod-icon">🎵</div>
+        <h4>Música Original</h4>
+        <p>Trilha sonora e efeitos sonoros compostos especialmente para o jogo, enriquecendo a experiência e
+          complementando a atmosfera oceânica.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="publico">
+    <div class="pub-intro">
+      <p class="section-label">04 — Público-Alvo</p>
+      <h2 class="section-title">Para quem o projeto foi pensado?</h2>
+      <p>O Aquapura foi pensado para turmas de diferentes níveis, combinando conscientização ambiental com o ensino de
+        lógica e programação a partir do código-fonte real do jogo.</p>
+    </div>
+    <div class="pub-grid">
+      <div class="pub-card">
+        <span class="pub-tag">Ensino Fundamental II</span>
+        <h4>9º Ano</h4>
+        <p>Introdução ao pensamento computacional e à temática ambiental através do jogo, estimulando a curiosidade
+          sobre como software é construído.</p>
+      </div>
+      <div class="pub-card">
+        <span class="pub-tag">Ensino Médio</span>
+        <h4>1º, 2º e 3º Anos</h4>
+        <p>Aprofundamento no estudo de lógica com exemplos concretos extraídos do código em C, conectando programação a
+          um contexto real e significativo.</p>
+      </div>
+      <div class="pub-card">
+        <span class="pub-tag">Objetivo Pedagógico</span>
+        <h4>Estrutura e Processo</h4>
+        <p>Oferece compreensão sobre como um projeto de jogo é estruturado — da concepção ao código — mostrando o
+          caminho completo do desenvolvimento.</p>
+      </div>
+      <div class="pub-card">
+        <span class="pub-tag">Consciência Ambiental</span>
+        <h4>ODS na Prática</h4>
+        <p>O jogo torna o ODS 14 tangível: ao jogar, o estudante vivencia o impacto da poluição e da conservação marinha
+          de forma empática e interativa.</p>
+      </div>
+    </div>
+  </section>
+
+<section id="video">
+  <div class="video-inner">
+    <div class="video-text">
+      <p class="section-label">05 — Vídeo</p>
+      <h2 class="section-title">Veja o Projeto em Ação</h2>
+      <p>
+        Assista ao vídeo de demonstração do Operação Aquapura, mostrando o gameplay completo — a mecânica de coleta de
+        lixo, o sistema de oxigênio e a identidade visual do jogo.
+      </p>
+      <a href="https://youtu.be/CWikVOfFT9Y?si=snNHkJLCMFi-BiH6" target="_blank" class="btn btn-primary">Abrir Vídeo</a>
+    </div>
+    <a href="https://youtu.be/CWikVOfFT9Y?si=snNHkJLCMFi-BiH6" target="_blank" class="video-player">
+      <img
+        src="https://img.youtube.com/vi/CWikVOfFT9Y/maxresdefault.jpg"
+        alt="Thumbnail do vídeo"
+        style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.6;">
+      <div class="video-label">▶ YouTube</div>
+      <div class="video-overlay">
+        <div class="play-btn">▶</div>
+        <p class="video-caption">Clique para assistir no YouTube</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+  <footer>
+    <div class="footer-brand">
+      Operação Aquapura
+      <span>Projeto IFSP · ODS 14 — Vida na Água · 2026</span>
+    </div>
+    <div class="footer-tags">
+      <span class="tag">Alisson do PC</span>
+      <span class="tag">Linguagem C</span>
+      <span class="tag">ODS 14</span>
+      <span class="tag">Arte Original</span>
+      <span class="tag">Música Original</span>
+    </div>
+  </footer>
+
+  <script>
+    // Generate floating bubbles
+    const container = document.getElementById('bubblesContainer');
+    for (let i = 0; i < 18; i++) {
+      const b = document.createElement('div');
+      b.className = 'bubble';
+      const size = Math.random() * 20 + 6;
+      b.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      left: ${Math.random() * 100}%;
+      bottom: ${Math.random() * 20}%;
+      animation-duration: ${Math.random() * 12 + 8}s;
+      animation-delay: ${Math.random() * 10}s;
+    `;
+      container.appendChild(b);
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuizMaker Educacional — Portfólio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean-deep: #0a2342;
+    --ocean-mid: #0d4f6e;
+    --ocean-teal: #00b4d8;
+    --ocean-foam: #90e0ef;
+    --ocean-light: #caf0f8;
+    --sand: #f5ede3;
+    --coral: #ff6b6b;
+    --gold: #f4c542;
+    --white: #ffffff;
+    --text-dark: #0a2342;
+    --text-mid: #1a4a6e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--ocean-deep);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(10,35,66,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(0,180,216,0.2);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-style: italic;
+    color: var(--ocean-foam); letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.65); text-decoration: none;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.09em;
+    text-transform: uppercase; transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--ocean-teal); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 4rem 6rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,180,216,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 80% at 15% 80%, rgba(13,79,110,0.5) 0%, transparent 60%);
+  }
+
+  .waves-bg {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 200px; overflow: hidden;
+  }
+  .wave {
+    position: absolute; bottom: 0; left: 0;
+    width: 200%; height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 C150,100 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z' fill='%230d4f6e'/%3E%3C/svg%3E") repeat-x bottom;
+    background-size: 50% 100%;
+    animation: wave-anim 9s linear infinite;
+    opacity: 0.5;
+  }
+  .wave:nth-child(2) {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,80 C200,20 400,100 600,50 C800,0 1000,90 1200,60 L1200,120 L0,120 Z' fill='%2300b4d8'/%3E%3C/svg%3E");
+    animation-duration: 14s; animation-direction: reverse; opacity: 0.25;
+  }
+  @keyframes wave-anim { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .hero-content { position: relative; z-index: 1; max-width: 720px; }
+  .hero-eyebrow {
+    font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ocean-teal); font-weight: 500; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--ocean-teal); }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem); line-height: 1.05;
+    font-weight: 900; margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--ocean-foam); }
+  .hero-desc {
+    font-size: 1.1rem; line-height: 1.75;
+    color: rgba(255,255,255,0.72); max-width: 540px; margin-bottom: 2.5rem;
+  }
+  .hero-cta { display: inline-flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn {
+    padding: 0.85rem 2rem; border-radius: 4px;
+    font-family: 'DM Sans', sans-serif; font-weight: 500;
+    font-size: 0.9rem; cursor: pointer; transition: all 0.3s;
+    text-decoration: none; border: none; display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary { background: var(--ocean-teal); color: var(--ocean-deep); }
+  .btn-primary:hover { background: var(--ocean-foam); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.4); }
+  .btn-outline:hover { border-color: var(--ocean-teal); color: var(--ocean-teal); }
+
+  .hero-scroll {
+    position: absolute; bottom: 3rem; right: 4rem; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: rgba(255,255,255,0.35); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--ocean-teal), transparent);
+    animation: scroll-pulse 2s ease-in-out infinite;
+  }
+  @keyframes scroll-pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+  /* ── ACESSO ── fundo igual ao restante da página */
+  #acesso {
+    background: linear-gradient(160deg, var(--ocean-mid) 0%, var(--ocean-deep) 100%);
+    padding: 5rem 4rem;
+    border-top: 1px solid rgba(0,180,216,0.15);
+    border-bottom: 1px solid rgba(0,180,216,0.15);
+  }
+  .acesso-header { text-align: center; margin-bottom: 3rem; }
+  .acesso-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+  }
+  .acesso-header p { color: rgba(255,255,255,0.6); margin-top: 0.8rem; }
+
+  /* Um único card centralizado */
+  .acesso-single {
+    max-width: 480px;
+    margin: 0 auto;
+    border-radius: 16px;
+    padding: 2.8rem 2.4rem;
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(0,180,216,0.3);
+    box-shadow: 0 4px 24px rgba(0,180,216,0.1);
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .acesso-single:hover {
+    border-color: rgba(0,180,216,0.6);
+    box-shadow: 0 12px 40px rgba(0,180,216,0.18);
+    transform: translateY(-4px);
+  }
+  .acesso-single .acesso-emoji { font-size: 3.5rem; margin-bottom: 1.2rem; }
+  .acesso-single h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--white); margin-bottom: 0.8rem;
+  }
+  .acesso-single p {
+    font-size: 0.95rem; color: rgba(255,255,255,0.65);
+    line-height: 1.65; margin-bottom: 1.8rem;
+  }
+  .acesso-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0.85rem 2.2rem; border-radius: 6px;
+    background: var(--ocean-teal); color: var(--ocean-deep);
+    font-weight: 700; font-size: 0.95rem;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .acesso-btn:hover { background: var(--ocean-foam); transform: translateY(-2px); }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ocean-teal); font-weight: 500; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--ocean-teal); }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── OBJETIVO ── */
+  #objetivo { background: var(--sand); color: var(--text-dark); position: relative; overflow: hidden; }
+  #objetivo::after {
+    content: 'Q';
+    position: absolute; right: -2rem; bottom: -4rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 22rem; font-weight: 900; color: rgba(0,180,216,0.08);
+    line-height: 1; pointer-events: none;
+  }
+  .objetivo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 1; }
+  .objetivo-text .section-label { color: var(--ocean-mid); }
+  .objetivo-text .section-label::before { background: var(--ocean-mid); }
+  .objetivo-text .section-title { color: var(--text-dark); }
+  .objetivo-text p { font-size: 1.05rem; line-height: 1.8; color: var(--text-mid); margin-bottom: 1.2rem; }
+  .objetivo-card {
+    background: var(--ocean-deep); border-radius: 12px;
+    padding: 2.5rem; color: var(--white); border-top: 3px solid var(--ocean-teal);
+  }
+  .objetivo-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1rem; color: var(--ocean-foam); }
+  .objetivo-card p { font-size: 0.95rem; line-height: 1.7; color: rgba(255,255,255,0.75); }
+
+  /* ── DESCRIÇÃO ── */
+  #descricao { background: linear-gradient(135deg, var(--ocean-mid) 0%, var(--ocean-deep) 100%); }
+  .desc-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
+  .desc-text p { font-size: 1.05rem; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 1.2rem; }
+  .features-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .features-list li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 1.2rem; border-radius: 8px;
+    background: rgba(255,255,255,0.05); border-left: 2px solid var(--ocean-teal);
+  }
+  .feat-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .feat-text strong { display: block; font-size: 0.9rem; margin-bottom: 0.2rem; color: var(--ocean-foam); }
+  .feat-text span { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+
+  .tech-grid { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 2.5rem; }
+  .tech-pill {
+    padding: 0.4rem 1rem; border-radius: 999px;
+    font-size: 0.8rem; font-weight: 600;
+    background: rgba(0,180,216,0.12); color: var(--ocean-teal);
+    border: 1px solid rgba(0,180,216,0.25); letter-spacing: 0.04em;
+  }
+
+  .desc-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+  .img-container {
+    border-radius: 8px; overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,180,216,0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .img-container:hover { transform: translateY(-4px); border-color: var(--ocean-teal); }
+  .img-container.tall { grid-row: span 2; }
+  .img-container img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 8px; }
+
+  /* ── ODS ── */
+  #ods { background: var(--ocean-deep); border-top: 1px solid rgba(0,180,216,0.12); border-bottom: 1px solid rgba(0,180,216,0.12); }
+  .ods-intro { max-width: 620px; margin-bottom: 3.5rem; }
+  .ods-intro p { color: rgba(255,255,255,0.7); line-height: 1.7; margin-top: 1rem; }
+  .ods-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; }
+  .ods-card {
+    border-radius: 10px; padding: 1.8rem 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .ods-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+  .ods-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; line-height: 1; margin-bottom: 0.6rem; opacity: 0.9; }
+  .ods-card h4 { font-size: 0.9rem; font-weight: 500; line-height: 1.4; margin-bottom: 0.5rem; }
+  .ods-card p { font-size: 0.78rem; opacity: 0.8; line-height: 1.5; }
+  .ods-4  { background: #c31f33; }
+  .ods-9  { background: #fd6925; }
+  .ods-10 { background: #dd1367; }
+  .ods-17 { background: #19486a; }
+
+  /* ── BNCC ── */
+  #bncc { background: var(--sand); color: var(--text-dark); }
+  .bncc-intro .section-label { color: var(--ocean-mid); }
+  .bncc-intro .section-label::before { background: var(--ocean-mid); }
+  .bncc-intro .section-title { color: var(--text-dark); }
+  .bncc-intro p { color: var(--text-mid); font-size: 1rem; line-height: 1.8; max-width: 650px; margin-bottom: 2.5rem; }
+  .bncc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .bncc-card {
+    background: var(--white); border-radius: 10px; padding: 1.8rem;
+    border-top: 3px solid var(--ocean-mid);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: box-shadow 0.3s, transform 0.3s;
+  }
+  .bncc-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-3px); }
+  .bncc-tag {
+    display: inline-block; background: var(--ocean-light); color: var(--ocean-mid);
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.25rem 0.7rem; border-radius: 20px; margin-bottom: 1rem;
+  }
+  .bncc-card h4 { font-size: 1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; }
+  .bncc-card p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; }
+
+  /* ── INTEGRANTES ── */
+  #integrantes { background: linear-gradient(160deg, var(--ocean-mid) 0%, var(--ocean-deep) 100%); }
+  .team-intro { max-width: 600px; margin-bottom: 3.5rem; }
+  .team-intro p { color: rgba(255,255,255,0.7); line-height: 1.7; margin-top: 1rem; }
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; }
+  .team-card {
+    border-radius: 14px; padding: 2rem 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(0,180,216,0.2);
+    text-align: center; transition: all 0.3s;
+  }
+  .team-card:hover { background: rgba(0,180,216,0.1); border-color: rgba(0,180,216,0.5); transform: translateY(-4px); }
+  .team-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--ocean-teal), var(--ocean-mid));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900;
+    color: var(--ocean-deep); margin: 0 auto 1rem; border: 3px solid rgba(0,180,216,0.3);
+  }
+  .team-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+  .team-card p { font-size: 0.8rem; color: var(--ocean-teal); font-weight: 500; }
+
+  /* ── GALERIA ── */
+  #galeria { background: linear-gradient(180deg, var(--ocean-deep) 0%, #061829 100%); }
+  .galeria-intro { margin-bottom: 3rem; }
+  .galeria-intro p { color: rgba(255,255,255,0.7); max-width: 500px; margin-top: 0.8rem; }
+  .masonry { columns: 3; column-gap: 1.2rem; }
+  .masonry-item {
+    break-inside: avoid; margin-bottom: 1.2rem; border-radius: 8px; overflow: hidden;
+    display: block; transition: all 0.3s; cursor: default;
+    border: 1px solid rgba(0,180,216,0.2);
+  }
+  .masonry-item:hover { transform: scale(1.02); border-color: var(--ocean-teal); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+  .masonry-item img { display: block; width: 100%; height: auto; }
+
+  /* ── VIDEO ── */
+  #video { background: var(--ocean-deep); border-top: 1px solid rgba(0,180,216,0.12); }
+  .video-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: center; }
+  .video-text p { font-size: 1.05rem; line-height: 1.8; color: rgba(255,255,255,0.78); margin-bottom: 1.2rem; }
+  .video-player {
+    border-radius: 14px; overflow: hidden;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(0,180,216,0.2);
+    position: relative;
+  }
+  .video-label {
+    background: rgba(0,180,216,0.15); color: var(--ocean-teal);
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.6rem 1.2rem; position: absolute; top: 0; left: 0; z-index: 2;
+  }
+  .video-overlay {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 260px; gap: 1.2rem; padding: 2rem; position: relative; z-index: 1;
+  }
+  .play-btn {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: var(--ocean-teal); color: var(--ocean-deep);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; cursor: pointer; transition: transform 0.2s, background 0.2s;
+  }
+  .play-btn:hover { transform: scale(1.1); background: var(--ocean-foam); }
+  .video-caption { font-size: 0.82rem; color: rgba(255,255,255,0.8); text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #030e1c; padding: 3rem 4rem;
+    border-top: 1px solid rgba(0,180,216,0.1);
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-brand { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--ocean-foam); }
+  .footer-brand span { display: block; font-family: 'DM Sans', sans-serif; font-style: normal; font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem; }
+  .footer-tags { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .tag { background: rgba(0,180,216,0.1); color: var(--ocean-teal); font-size: 0.75rem; padding: 0.3rem 0.9rem; border-radius: 20px; border: 1px solid rgba(0,180,216,0.2); }
+  .footer-note { font-size: 0.78rem; color: rgba(255,255,255,0.28); }
+
+  /* ── ANIMATIONS ── */
+  .fade-up { opacity: 0; transform: translateY(24px); animation: fadeUp 0.75s ease forwards; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.30s; }
+  .delay-3 { animation-delay: 0.45s; }
+  .delay-4 { animation-delay: 0.60s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    section, #acesso { padding: 4rem 2rem; }
+    .objetivo-grid, .desc-grid, .video-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .bncc-grid { grid-template-columns: 1fr 1fr; }
+    .masonry { columns: 2; }
+    footer { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hero { padding: 7rem 2rem 3rem; }
+    .bncc-grid, .team-grid { grid-template-columns: 1fr; }
+    .desc-visual { grid-template-columns: 1fr; }
+    .img-container.tall { grid-row: auto; }
+    .masonry { columns: 1; }
+    .ods-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">QuizMaker Educacional</div>
+  <ul class="nav-links">
+    <li><a href="#acesso">Acessar</a></li>
+    <li><a href="#objetivo">Objetivo</a></li>
+    <li><a href="#descricao">Funcionalidades</a></li>
+    <li><a href="#ods">Impacto</a></li>
+    <li><a href="#bncc">BNCC</a></li>
+    <li><a href="#integrantes">Equipe</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow fade-up">Portfólio do Software · 2026</p>
+    <h1 class="fade-up delay-1">
+      QuizMaker<br><em>Educacional</em><br>Plataforma Interativa
+    </h1>
+    <p class="hero-desc fade-up delay-2">
+      Uma ferramenta criada para professores e estudantes criarem e responderem quizzes interativos de forma rápida, visual e engajadora — gamificando o aprendizado em sala de aula.
+    </p>
+    <div class="hero-cta fade-up delay-3">
+      <a href="#acesso" class="btn btn-primary">🚀 Acessar o Sistema</a>
+      <a href="#objetivo" class="btn btn-outline">Conhecer o Projeto</a>
+    </div>
+  </div>
+  <div class="waves-bg">
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- ACESSO RÁPIDO -->
+<section id="acesso">
+  <div class="acesso-header">
+    <p class="section-label" style="justify-content:center;">Acesso Direto</p>
+    <h2>Entre no Sistema</h2>
+    <p>Acesse o QuizMaker e comece a usar agora mesmo</p>
+  </div>
+  <div class="acesso-single">
+    <div class="acesso-emoji">🎯</div>
+    <h3>Acessar o QuizMaker</h3>
+    <p>Entre na plataforma e escolha seu perfil — professor ou aluno — diretamente na tela inicial do sistema.</p>
+    <a href="https://projeto-quizmaker.web.app" target="_blank" class="acesso-btn">
+      🚀 Abrir o sistema
+    </a>
+  </div>
+</section>
+
+<!-- OBJETIVO -->
+<section id="objetivo">
+  <div class="objetivo-grid">
+    <div class="objetivo-text">
+      <p class="section-label">01 — Objetivo</p>
+      <h2 class="section-title">Por que criamos o QuizMaker?</h2>
+      <p>
+        O <strong>QuizMaker Educacional</strong> nasceu da ideia de transformar a avaliação escolar em um processo mais dinâmico, justo e motivador. Em vez de provas tradicionais e estáticas, o software permite que professores criem desafios interativos com <strong>feedback imediato</strong> para cada resposta.
+      </p>
+      <p>
+        Estudantes aprendem enquanto jogam, desenvolvendo autonomia, interesse pelo conteúdo e a capacidade de identificar seus próprios erros — tornando o aprendizado um ciclo contínuo e engajador.
+      </p>
+      <p>
+        O sistema é multiplataforma, acessível pelo navegador em qualquer dispositivo, e conta com painéis separados para professores, alunos e administradores, garantindo uma gestão pedagógica completa.
+      </p>
+    </div>
+    <div class="objetivo-card">
+      <h3>🎯 Meta do Projeto</h3>
+      <p>
+        Democratizar o acesso a metodologias ativas de ensino, oferecendo uma plataforma gratuita, intuitiva e visualmente atraente para que professores de qualquer disciplina possam gamificar suas aulas — sem precisar de conhecimento técnico avançado.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- DESCRIÇÃO -->
+<section id="descricao">
+  <div class="desc-grid">
+    <div class="desc-text">
+      <p class="section-label">02 — Funcionalidades</p>
+      <h2 class="section-title">Como o Sistema Funciona</h2>
+      <p>
+        O QuizMaker possui três perfis distintos: <strong>Admin</strong> (gerencia professores e plataforma), <strong>Professor</strong> (cria e publica quizzes) e <strong>Aluno</strong> (responde e acompanha seu desempenho).
+      </p>
+      <ul class="features-list">
+        <li>
+          <span class="feat-icon">📝</span>
+          <div class="feat-text">
+            <strong>Criação Intuitiva de Quizzes</strong>
+            <span>Editor completo com perguntas, alternativas, resposta correta e explicação opcional para cada questão.</span>
+          </div>
+        </li>
+        <li>
+          <span class="feat-icon">⚡</span>
+          <div class="feat-text">
+            <strong>Feedback em Tempo Real</strong>
+            <span>O aluno sabe imediatamente se acertou ou errou, com destaque visual e a explicação do conteúdo.</span>
+          </div>
+        </li>
+        <li>
+          <span class="feat-icon">📊</span>
+          <div class="feat-text">
+            <strong>Painel de Resultados</strong>
+            <span>Professores visualizam o desempenho de cada aluno; alunos consultam seu histórico completo.</span>
+          </div>
+        </li>
+        <li>
+          <span class="feat-icon">🌐</span>
+          <div class="feat-text">
+            <strong>Publicação e Controle</strong>
+            <span>O professor decide quando o quiz vai ao ar e pode despublicá-lo a qualquer momento.</span>
+          </div>
+        </li>
+        <li>
+          <span class="feat-icon">🛡️</span>
+          <div class="feat-text">
+            <strong>Gestão Administrativa</strong>
+            <span>Admin cadastra professores, ativa/desativa contas e monitora todos os quizzes da plataforma.</span>
+          </div>
+        </li>
+      </ul>
+      <div class="tech-grid">
+        <span class="tech-pill">React 18</span>
+        <span class="tech-pill">Firebase</span>
+        <span class="tech-pill">Firestore</span>
+        <span class="tech-pill">Vite</span>
+        <span class="tech-pill">React Router</span>
+        <span class="tech-pill">Lucide Icons</span>
+        <span class="tech-pill">JavaScript</span>
+        <span class="tech-pill">CSS Vars</span>
+      </div>
+    </div>
+    <div class="desc-visual">
+      <div class="img-container tall">
+        <img src="screenshots/dashboard.png" alt="Dashboard do Professor">
+      </div>
+      <div class="img-container">
+        <img src="screenshots/quiz-tela.png" alt="Tela do Quiz">
+      </div>
+      <div class="img-container">
+        <img src="screenshots/resultado.png" alt="Tela de Resultados">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ODS -->
+<section id="ods">
+  <div class="ods-intro">
+    <p class="section-label">03 — Impacto</p>
+    <h2 class="section-title">Alinhamento Global</h2>
+    <p>A democratização de ferramentas de ensino digital apoia metas fundamentais de desenvolvimento estabelecidas pela ONU na Agenda 2030.</p>
+  </div>
+  <div class="ods-grid">
+    <div class="ods-card ods-4">
+      <div class="ods-num">4</div>
+      <h4>Educação de Qualidade</h4>
+      <p>Garantir metodologias de ensino inclusivas, equitativas e que promovam a aprendizagem ativa e moderna.</p>
+    </div>
+    <div class="ods-card ods-9">
+      <div class="ods-num">9</div>
+      <h4>Inovação e Infraestrutura</h4>
+      <p>Fomentar o desenvolvimento tecnológico e o acesso à informação no ambiente escolar brasileiro.</p>
+    </div>
+    <div class="ods-card ods-10">
+      <div class="ods-num">10</div>
+      <h4>Redução de Desigualdades</h4>
+      <p>Oferecer ferramentas gratuitas e acessíveis em qualquer dispositivo com conexão à internet.</p>
+    </div>
+    <div class="ods-card ods-17">
+      <div class="ods-num">17</div>
+      <h4>Parcerias para a Implementação</h4>
+      <p>Criar pontes entre a comunidade de tecnologia e a rede de ensino público e privado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BNCC -->
+<section id="bncc">
+  <div class="bncc-intro">
+    <p class="section-label">04 — BNCC</p>
+    <h2 class="section-title">Aplicação no Currículo Brasileiro</h2>
+    <p>O uso do QuizMaker como metodologia ativa favorece diretamente o desenvolvimento das competências gerais da Base Nacional Comum Curricular.</p>
+  </div>
+  <div class="bncc-grid">
+    <div class="bncc-card">
+      <span class="bncc-tag">Competência 5</span>
+      <h4>Cultura Digital</h4>
+      <p>Compreender, utilizar e criar tecnologias digitais de forma crítica, significativa e ética para comunicar e acessar informações.</p>
+    </div>
+    <div class="bncc-card">
+      <span class="bncc-tag">Competência 2</span>
+      <h4>Pensamento Científico e Crítico</h4>
+      <p>Exercitar a curiosidade intelectual e usar ferramentas para investigar causas e elaborar hipóteses por meio da resolução de problemas.</p>
+    </div>
+    <div class="bncc-card">
+      <span class="bncc-tag">Competência 1</span>
+      <h4>Conhecimento</h4>
+      <p>O formato de quiz auxilia na sistematização e fixação de conhecimentos, estimulando a revisão ativa e a metacognição.</p>
+    </div>
+    <div class="bncc-card">
+      <span class="bncc-tag">Competência 4</span>
+      <h4>Comunicação</h4>
+      <p>Uso de linguagens digitais e multimodais para comunicar conceitos com clareza no ambiente educacional.</p>
+    </div>
+    <div class="bncc-card">
+      <span class="bncc-tag">Competência 9</span>
+      <h4>Empatia e Cooperação</h4>
+      <p>Promover o trabalho colaborativo entre professores, alunos e gestores em um ambiente digital compartilhado.</p>
+    </div>
+    <div class="bncc-card">
+      <span class="bncc-tag">Competência 10</span>
+      <h4>Responsabilidade e Cidadania</h4>
+      <p>Agir com responsabilidade no uso de plataformas digitais para a construção coletiva do conhecimento escolar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria">
+  <div class="galeria-intro">
+    <p class="section-label">06 — Galeria</p>
+    <h2 class="section-title">Screenshots do Software</h2>
+    <p>Confira algumas telas da versão atual do aplicativo em funcionamento.</p>
+  </div>
+  <div class="masonry">
+    <div class="masonry-item"><img src="screenshots/menu.png" alt="Menu do Aplicativo"></div>
+    <div class="masonry-item"><img src="screenshots/editor.png" alt="Editor de Quiz"></div>
+    <div class="masonry-item"><img src="screenshots/biblioteca.png" alt="Biblioteca de Quizzes"></div>
+    <div class="masonry-item"><img src="screenshots/acerto.png" alt="Tela de Acerto"></div>
+    <div class="masonry-item"><img src="screenshots/erro.png" alt="Tela de Erro"></div>
+    <div class="masonry-item"><img src="screenshots/stats.png" alt="Estatísticas"></div>
+  </div>
+</section>
+
+<!-- VÍDEO -->
+<section id="video">
+  <div class="video-inner">
+    <div class="video-text">
+      <p class="section-label">07 — Demonstração</p>
+      <h2 class="section-title">Veja o Projeto em Ação</h2>
+      <p>
+        Assista ao vídeo de demonstração e conheça o fluxo completo da plataforma — desde o cadastro de professores pelo Admin até a experiência do aluno respondendo um quiz com feedback instantâneo.
+      </p>
+      <p>
+        O vídeo documenta as telas principais, os recursos de gamificação e o impacto do sistema no engajamento dos estudantes.
+      </p>
+      <a href="https://projeto-quizmaker.web.app" class="btn btn-primary" target="_blank">🌐 Acessar ao vivo</a>
+    </div>
+    <div class="video-player">
+    <div class="video-label">▶ Demonstração</div>
+    <!-- Container responsivo para o vídeo -->
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+        <iframe 
+            src="https://drive.google.com/file/d/1GXRyCt9QuQ3T1Cr-CGA5gneyPs4Sr3hE/preview" 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
+            allow="autoplay; encrypted-media" 
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="integrantes">
+  <div class="footer-brand">
+    QuizMaker Educacional
+    <span>Portfólio de Software · Projeto Escolar · 2026</span>
+  </div>
+  <div class="footer-tags">
+    <a class="tag" href="https://www.linkedin.com/in/breno-estorari-a7a865218/">Breno E.</a>
+    <a class="tag" href=" ">Bruno M.</a>
+    <a class="tag" href="https://www.linkedin.com/in/jose-pedro-franco-8a326026a/">José Pedro</a>
+    <a class="tag" href=" ">Arthur Marques</a>
+    <a class="tag" href=" ">Vinicius S.</a>
+  </div>
+  <p class="footer-note">projeto-quizmaker.web.app</p>
+</footer>
+
+</body>
+</html>
