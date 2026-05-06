@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do Frasco à Descoberta — Mulheres no Laboratório</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --lab-deep: #0f1b2d;
+            --lab-mid: #1a3a5c;
+            --lab-accent: #4fc3f7;
+            --lab-foam: #b3e5fc;
+            --lab-light: #e1f5fe;
+            --cream: #f5f0e8;
+            --wine: #8b2252;
+            --gold: #e8c84a;
+            --white: #ffffff;
+            --text-dark: #0f1b2d;
+            --text-mid: #2a4a6e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--lab-deep);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 4rem;
+            background: rgba(15, 27, 45, 0.88);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(79, 195, 247, 0.18);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--lab-foam);
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--lab-accent);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 4rem 4rem;
+            position: relative;
+            overflow: hidden;
+            background: var(--lab-deep);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 60% at 75% 40%, rgba(79, 195, 247, 0.12) 0%, transparent 65%),
+                radial-gradient(ellipse 40% 70% at 15% 75%, rgba(139, 34, 82, 0.18) 0%, transparent 55%);
+        }
+
+        /* Floating particles */
+        .particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.18;
+            animation: float-up linear infinite;
+        }
+
+        .particle:nth-child(1) {
+            width: 6px;
+            height: 6px;
+            background: var(--lab-accent);
+            left: 12%;
+            animation-duration: 9s;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            left: 28%;
+            animation-duration: 13s;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(3) {
+            width: 8px;
+            height: 8px;
+            background: var(--lab-accent);
+            left: 45%;
+            animation-duration: 11s;
+            animation-delay: 5s;
+        }
+
+        .particle:nth-child(4) {
+            width: 5px;
+            height: 5px;
+            background: var(--wine);
+            left: 62%;
+            animation-duration: 8s;
+            animation-delay: 1s;
+        }
+
+        .particle:nth-child(5) {
+            width: 7px;
+            height: 7px;
+            background: var(--lab-foam);
+            left: 78%;
+            animation-duration: 14s;
+            animation-delay: 3s;
+        }
+
+        .particle:nth-child(6) {
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            left: 90%;
+            animation-duration: 10s;
+            animation-delay: 6s;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) scale(0.8);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.18;
+            }
+
+            90% {
+                opacity: 0.18;
+            }
+
+            100% {
+                transform: translateY(-10vh) scale(1.1);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.76rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--lab-accent);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 1px;
+            background: var(--lab-accent);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 5.5vw, 5rem);
+            line-height: 1.08;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--lab-foam);
+        }
+
+        .hero-sub {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-style: italic;
+            color: var(--gold);
+            margin-bottom: 1.8rem;
+            font-weight: 700;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.68);
+            max-width: 560px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.85rem 2rem;
+            border-radius: 4px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--lab-accent);
+            color: var(--lab-deep);
+        }
+
+        .btn-primary:hover {
+            background: var(--lab-foam);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--lab-accent);
+            color: var(--lab-accent);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem;
+            right: 4rem;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--lab-accent), transparent);
+            animation: scroll-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll-pulse {
+
+            0%,
+            100% {
+                opacity: 0.3
+            }
+
+            50% {
+                opacity: 1
+            }
+        }
+
+        /* ── SECTIONS ── */
+        section {
+            padding: 6rem 4rem;
+        }
+
+        .section-label {
+            font-size: 0.74rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--lab-accent);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .section-label::before {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 1px;
+            background: var(--lab-accent);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ── OBJETIVO ── */
+        #objetivo {
+            background: var(--cream);
+            color: var(--text-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #objetivo::after {
+            content: '⚗';
+            position: absolute;
+            right: 3rem;
+            bottom: -1rem;
+            font-size: 18rem;
+            opacity: 0.05;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        #objetivo .section-label {
+            color: var(--lab-mid);
+        }
+
+        #objetivo .section-label::before {
+            background: var(--lab-mid);
+        }
+
+        #objetivo .section-title {
+            color: var(--text-dark);
+        }
+
+        .objetivo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .objetivo-text p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-mid);
+            margin-bottom: 1.2rem;
+        }
+
+        .objetivo-card {
+            background: var(--lab-deep);
+            border-radius: 12px;
+            padding: 2.5rem;
+            color: var(--white);
+            border-top: 3px solid var(--lab-accent);
+        }
+
+        .objetivo-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--lab-foam);
+        }
+
+        .objetivo-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        /* ── DESCRIÇÃO ── */
+        #descricao {
+            background: var(--lab-deep);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .desc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .desc-text p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 1.2rem;
+        }
+
+        .steps-list {
+            list-style: none;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .steps-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border-left: 2px solid var(--lab-accent);
+        }
+
+        .step-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .step-text strong {
+            display: block;
+            font-size: 0.88rem;
+            margin-bottom: 0.2rem;
+            color: var(--lab-foam);
+        }
+
+        .step-text span {
+            font-size: 0.83rem;
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        /* Scientist cards */
+        .scientists-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .scientist-card {
+            border-radius: 10px;
+            padding: 1.4rem;
+            background: rgba(79, 195, 247, 0.06);
+            border: 1px solid rgba(79, 195, 247, 0.18);
+            transition: transform 0.3s, border-color 0.3s;
+            cursor: default;
+        }
+
+        .scientist-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--lab-accent);
+        }
+
+        .scientist-flask {
+            font-size: 1.6rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .scientist-item {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--lab-accent);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .scientist-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.2rem;
+        }
+
+        .scientist-field {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        /* ── DIFERENCIAIS ── */
+        #diferenciais {
+            background: var(--lab-mid);
+        }
+
+        .dif-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .dif-card {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 2rem 1.5rem;
+            border-top: 3px solid transparent;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .dif-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dif-card:nth-child(1) {
+            border-color: var(--lab-accent);
+        }
+
+        .dif-card:nth-child(2) {
+            border-color: var(--gold);
+        }
+
+        .dif-card:nth-child(3) {
+            border-color: var(--wine);
+        }
+
+        .dif-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .dif-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--lab-foam);
+            margin-bottom: 0.6rem;
+        }
+
+        .dif-card p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.65;
+        }
+
+        /* ── PÚBLICO E PEDAGÓGICO ── */
+        #pedagogico {
+            background: var(--cream);
+            color: var(--text-dark);
+        }
+
+        #pedagogico .section-label {
+            color: var(--lab-mid);
+        }
+
+        #pedagogico .section-label::before {
+            background: var(--lab-mid);
+        }
+
+        #pedagogico .section-title {
+            color: var(--text-dark);
+        }
+
+        .ped-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .ped-intro p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-mid);
+            margin-bottom: 1rem;
+        }
+
+        .pub-card {
+            background: var(--lab-deep);
+            color: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            border-top: 3px solid var(--gold);
+        }
+
+        .pub-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .obj-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .obj-list li {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.72);
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .obj-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--lab-accent);
+            font-weight: 700;
+        }
+
+        /* ── ESCOLAS ── */
+        #escolas {
+            background: var(--lab-deep);
+        }
+
+        .escolas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .escola-card {
+            background: rgba(79, 195, 247, 0.05);
+            border: 1px solid rgba(79, 195, 247, 0.15);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .escola-card:hover {
+            border-color: var(--lab-accent);
+            transform: translateY(-4px);
+        }
+
+        .escola-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .escola-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--lab-foam);
+            margin-bottom: 0.5rem;
+        }
+
+        .escola-card p {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.6;
+        }
+
+        /* ── GALERIA ── */
+        #galeria {
+            background: var(--lab-mid);
+        }
+
+        .galeria-intro p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.8rem;
+            max-width: 500px;
+        }
+
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin-top: 2.5rem;
+        }
+
+        .galeria-item {
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(79, 195, 247, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
+        }
+
+        .galeria-item:hover {
+            transform: scale(1.03);
+            border-color: var(--lab-accent);
+        }
+
+        .galeria-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .galeria-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .galeria-placeholder span {
+            font-size: 2.5rem;
+            opacity: 0.4;
+        }
+
+        .galeria-placeholder p {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        /* ── VÍDEO ── */
+        #video {
+            background: var(--lab-deep);
+        }
+
+        .video-inner {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .video-text p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+
+
+        /* ── FOOTER ── */
+        footer {
+            background: #060f1a;
+            padding: 3rem 4rem;
+            border-top: 1px solid rgba(79, 195, 247, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--lab-foam);
+        }
+
+        .footer-brand span {
+            display: block;
+            font-family: 'DM Sans', sans-serif;
+            font-style: normal;
+            font-size: 0.76rem;
+            color: rgba(255, 255, 255, 0.35);
+            margin-top: 0.2rem;
+        }
+
+        .footer-tags {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(79, 195, 247, 0.08);
+            color: var(--lab-accent);
+            font-size: 0.75rem;
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            border: 1px solid rgba(79, 195, 247, 0.18);
+        }
+
+        /* ── MODAL ── */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 20, 40, 0.95);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 90vw;
+        }
+
+        .modal-content {
+            max-width: 100%;
+            max-height: 78vh;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--white);
+            font-size: 28px;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .modal-close:hover {
+            background: var(--lab-accent);
+            color: var(--lab-deep);
+        }
+
+        .modal-prev,
+        .modal-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        .modal-prev:hover,
+        .modal-next:hover {
+            background: var(--lab-accent);
+            color: var(--lab-deep);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        #modal-caption {
+            margin-top: 12px;
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+
+            .objetivo-grid,
+            .desc-grid,
+            .ped-grid,
+            .video-inner {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .dif-grid,
+            .escolas-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .galeria-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .scientists-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .video-qrcode {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-qrcode img {
+            border-radius: 6px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-actions {
+            margin-top: 1.5rem;
+        }
+
+        /* BOTÃO ESPECIAL DE VÍDEO */
+        .btn-video {
+            background: linear-gradient(135deg, var(--lab-accent), var(--lab-foam));
+            color: var(--lab-deep);
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            box-shadow: 0 8px 20px rgba(79, 195, 247, 0.25);
+        }
+
+        .btn-video:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 28px rgba(79, 195, 247, 0.35);
+            background: linear-gradient(135deg, var(--lab-foam), var(--lab-accent));
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            nav .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .dif-grid,
+            .escolas-grid,
+            .galeria-grid,
+            .scientists-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-logo">Do Frasco à Descoberta</div>
+        <ul class="nav-links">
+            <li><a href="#objetivo">Objetivo</a></li>
+            <li><a href="#descricao">Descrição</a></li>
+            <li><a href="#diferenciais">Diferenciais</a></li>
+            <li><a href="#pedagogico">Pedagógico</a></li>
+            <li><a href="#escolas">Escolas</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#video">Vídeo</a></li>
+        </ul>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Portfólio Educacional · 2025</p>
+            <h1>Do Frasco<br>à <em>Descoberta</em></h1>
+            <p class="hero-sub">Mulheres no Laboratório</p>
+            <p class="hero-desc">
+                Promover a conscientização sobre o método científico e valorizar a participação de mulheres
+                na ciência por meio de uma atividade interativa, gamificada e educativa.
+            </p>
+            <div class="hero-cta">
+                <a href="#objetivo" class="btn btn-primary">Explorar Projeto</a>
+                <a href="#video" class="btn btn-outline">Ver Vídeo</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <div class="scroll-line"></div>
+            scroll
+        </div>
+    </section>
+
+    <!-- ── OBJETIVO ── -->
+    <section id="objetivo">
+        <div class="objetivo-grid">
+            <div class="objetivo-text">
+                <p class="section-label">01 — Objetivo</p>
+                <h2 class="section-title">Ciência como experiência viva</h2>
+                <p>
+                    Promover a conscientização sobre o método científico e valorizar a participação
+                    de mulheres na ciência por meio de uma atividade interativa e educativa.
+                </p>
+                <p>
+                    O projeto estimula a curiosidade, a criatividade e o aprendizado dos alunos através
+                    de uma simulação gamificada dentro de um laboratório, onde cada frasco coletado
+                    revela a história de uma grande cientista.
+                </p>
+            </div>
+            <div class="objetivo-card">
+                <h3>⚗️ A Proposta</h3>
+                <p>
+                    Uma atividade gamificada em que os alunos participam de uma simulação dentro de um laboratório.
+                    O cenário evolui conforme o avanço dos níveis, e cada frasco correto desbloqueio a história
+                    de uma cientista mulher — permitindo um aprendizado dinâmico e significativo.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── DESCRIÇÃO ── -->
+    <section id="descricao">
+        <div class="desc-grid">
+            <div class="desc-text">
+                <p class="section-label">02 — Descrição</p>
+                <h2 class="section-title">Como a atividade funciona</h2>
+                <p>
+                    Os alunos interagem com um coletor em um ambiente de laboratório virtual.
+                    A mecânica de pontuação exige atenção às cores dos frascos — as corretas
+                    somam pontos, as proibidas os reduzem.
+                </p>
+                <ul class="steps-list">
+                    <li>
+                        <span class="step-icon">🧪</span>
+                        <div class="step-text">
+                            <strong>Coleta de Frascos</strong>
+                            <span>Frascos de cores específicas concedem pontos; cores proibidas penalizam.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-icon">👩‍🔬</span>
+                        <div class="step-text">
+                            <strong>Desbloqueio de Cientistas</strong>
+                            <span>Cada item correto revela a história de uma cientista mulher.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-icon">🎧</span>
+                        <div class="step-text">
+                            <strong>Recursos Extras</strong>
+                            <span>Áudios e animações enriquecem a experiência de cada desbloqueio.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-icon">🏆</span>
+                        <div class="step-text">
+                            <strong>Cenário Dinâmico</strong>
+                            <span>O laboratório evolui visualmente conforme o jogador avança de nível.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <p
+                    style="font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--lab-accent); margin-bottom:1.2rem; font-weight:600;">
+                    Cientistas & Itens</p>
+                <div class="scientists-grid">
+                    <div class="scientist-card">
+                        <div class="scientist-flask">☢️</div>
+                        <div class="scientist-item">Frasco de Polônio/Rádio</div>
+                        <div class="scientist-name">Marie Curie</div>
+                        <div class="scientist-field">Física & Química</div>
+                    </div>
+                    <div class="scientist-card">
+                        <div class="scientist-flask">💡</div>
+                        <div class="scientist-item">Placa de Circuito</div>
+                        <div class="scientist-name">Ada Lovelace</div>
+                        <div class="scientist-field">Computação</div>
+                    </div>
+                    <div class="scientist-card">
+                        <div class="scientist-flask">🚀</div>
+                        <div class="scientist-item">Cálculos de Trajetória</div>
+                        <div class="scientist-name">Katherine Johnson</div>
+                        <div class="scientist-field">Matemática Espacial</div>
+                    </div>
+                    <div class="scientist-card">
+                        <div class="scientist-flask">🧬</div>
+                        <div class="scientist-item">Estrutura de DNA</div>
+                        <div class="scientist-name">Rosalind Franklin</div>
+                        <div class="scientist-field">Bioquímica</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── DIFERENCIAIS ── -->
+    <section id="diferenciais">
+        <p class="section-label">03 — Diferenciais</p>
+        <h2 class="section-title">O que torna este projeto único</h2>
+        <div class="dif-grid">
+            <div class="dif-card">
+                <div class="dif-icon">🎮</div>
+                <h4>Gamificação com Propósito</h4>
+                <p>Sistema de cores e pontuação que mantém o aluno engajado enquanto aprende sobre ciência e método
+                    científico.</p>
+            </div>
+            <div class="dif-card">
+                <div class="dif-icon">👩‍🔬</div>
+                <h4>Visibilidade Feminina</h4>
+                <p>Cada nível apresenta mulheres que moldaram a história da ciência, ampliando referências e inspirando
+                    novos cientistas.</p>
+            </div>
+            <div class="dif-card">
+                <div class="dif-icon">🔬</div>
+                <h4>Cenário Evolutivo</h4>
+                <p>O laboratório se transforma com o avanço do jogador, garantindo uma experiência sempre nova e
+                    desafiadora.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PEDAGÓGICO ── -->
+    <section id="pedagogico">
+        <p class="section-label">04 — Pedagógico</p>
+        <h2 class="section-title">Objetivos de aprendizagem</h2>
+        <div class="ped-grid">
+            <div class="ped-intro">
+                <p>
+                    O projeto está alinhado ao desenvolvimento de competências científicas e digitais,
+                    promovendo aprendizagens integradas entre Ciências da Natureza, Tecnologia e Cultura.
+                </p>
+                <p>
+                    Destinado a alunos do Ensino Fundamental — anos finais — podendo ser adaptado
+                    conforme a faixa etária e os objetivos de cada instituição parceira.
+                </p>
+                <div
+                    style="margin-top:1.5rem; padding:1.2rem 1.5rem; border-radius:8px; background:rgba(13,58,92,0.15); border-left:3px solid var(--lab-mid);">
+                    <p style="font-size:0.88rem; color:var(--text-mid); font-style:italic; line-height:1.7;">
+                        "Este projeto busca transformar a forma como os alunos enxergam o ambiente de pesquisa,
+                        promovendo uma experiência significativa e inspiradora no laboratório."
+                    </p>
+                </div>
+            </div>
+            <div class="pub-card">
+                <h4>Objetivos Pedagógicos</h4>
+                <ul class="obj-list">
+                    <li>Desenvolver a compreensão sobre o método científico e o ambiente de laboratório.</li>
+                    <li>Incentivar o interesse pela ciência através da coleta de itens e experimentação virtual.</li>
+                    <li>Dar visibilidade a mulheres cientistas e suas contribuições históricas.</li>
+                    <li>Promover aprendizagem interativa por meio de mecânicas de cores e pontuação.</li>
+                    <li>Estimular a investigação, curiosidade e o pensamento computacional.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── ESCOLAS ── -->
+    <section id="escolas">
+        <p class="section-label">05 — Escolas Parceiras</p>
+        <h2 class="section-title">Instituições em potencial</h2>
+        <div class="escolas-grid">
+            <div class="escola-card">
+                <div class="escola-icon">🏫</div>
+                <h4>E.E. Anésia Martins Mattos</h4>
+                <p>Escola Estadual parceira em potencial para aplicação do projeto.</p>
+            </div>
+            <div class="escola-card">
+                <div class="escola-icon">🏫</div>
+                <h4>E.E. Virgílio Marcondes de Castro</h4>
+                <p>Escola Estadual parceira em potencial para aplicação do projeto.</p>
+            </div>
+            <div class="escola-card">
+                <div class="escola-icon">🏫</div>
+                <h4>Colégio Valcam</h4>
+                <p>Educação Básica e Educação Profissional — parceira em potencial para aplicação.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── GALERIA ── -->
+    <section id="galeria">
+        <div class="galeria-intro">
+            <p class="section-label">06 — Galeria</p>
+            <h2 class="section-title">Imagens do Projeto</h2>
+            <p>Registros das etapas de criação e desenvolvimento.</p>
+        </div>
+
+        <div class="galeria-grid" id="galeria-grid">
+
+            <div class="galeria-item" onclick="openModal(0)">
+                <img src="images/galeria/f1.png" alt="Imagem 1" loading="lazy">
+            </div>
+
+            <div class="galeria-item" onclick="openModal(1)">
+                <img src="images/galeria/f2.png" alt="Imagem 2" loading="lazy">
+            </div>
+
+            <div class="galeria-item" onclick="openModal(2)">
+                <img src="images/galeria/f3.png" alt="Imagem 3" loading="lazy">
+            </div>
+
+            <div class="galeria-item" onclick="openModal(3)">
+                <img src="images/galeria/f4.png" alt="Imagem 4" loading="lazy">
+            </div>
+
+            <div class="galeria-item" onclick="openModal(4)">
+                <img src="images/galeria/f5.png" alt="Imagem 5" loading="lazy">
+            </div>
+
+            <div class="galeria-item" onclick="openModal(5)">
+                <img src="images/galeria/f6.png" alt="Imagem 6" loading="lazy">
+            </div>
+
+        </div>
+    </section>
+
+    <section id="video">
+        <div class="video-inner">
+            <div class="video-text">
+                <p class="section-label">07 — Vídeo</p>
+                <h2 class="section-title">Veja o projeto em ação</h2>
+                <p>
+                    Escaneie o QR Code ou clique no botão abaixo para assistir à demonstração completa do projeto
+                    e entender como a gamificação e a narrativa das cientistas se integram
+                    na experiência do aluno.
+                </p>
+
+                <!-- BOTÕES -->
+                <div class="video-actions">
+                    <a href="https://u1.padletusercontent.com/uploads/padlet-uploads-usc1/5491444829/15e2a64061e0e7f6d4d626d68abedddd/WhatsApp_Video_2026_04_16_at_15_05_19.mp4?token=UnMM-ckVguCPWZx4t5MgZFTXWzXYgGHlPU31QhVgrJZrYamjE441z9lwVNm9XqQaCTERI-nXv5NsMb81BBY4oqOnFlaU0ThIGOul9j3PGJBHuXNoMo2eOUq1IV6sQVtbhZ_vlhja-_uYkq8I2VVWUvBUvMcSR1uI1dpSCC2l1fpE2kuWqmjv8CIyiyv5PT29x7LIyquaOv-26bbjeohpFukkPL2f1wQfNTC1353aLrZPQXxQhamwbAW1Jg6ChyOS33QdKvqJoXdmpAaYzgv93Hw1lHQLnfDSVEqLpmN-1FA="
+                        target="_blank" class="btn btn-video">
+                        ▶ Assistir vídeo
+                    </a>
+                </div>
+            </div>
+
+            <div class="video-frame">
+                <div class="video-qrcode">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://u1.padletusercontent.com/uploads/padlet-uploads-usc1/5491444829/15e2a64061e0e7f6d4d626d68abedddd/WhatsApp_Video_2026_04_16_at_15_05_19.mp4?token=UnMM-ckVguCPWZx4t5MgZFTXWzXYgGHlPU31QhVgrJZrYamjE441z9lwVNm9XqQaCTERI-nXv5NsMb81BBY4oqOnFlaU0ThIGOul9j3PGJBHuXNoMo2eOUq1IV6sQVtbhZ_vlhja-_uYkq8I2VVWUvBUvMcSR1uI1dpSCC2l1fpE2kuWqmjv8CIyiyv5PT29x7LIyquaOv-26bbjeohpFukkPL2f1wQfNTC1353aLrZPQXxQhamwbAW1Jg6ChyOS33QdKvqJoXdmpAaYzgv93Hw1lHQLnfDSVEqLpmN-1FA="
+                        alt="QR Code para assistir o vídeo" />
+                    <p style="margin-top:10px; font-size:0.85rem; color:rgba(255,255,255,0.6);">
+                        Escaneie para assistir
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+        <div class="footer-brand">
+            Do Frasco à Descoberta
+            <span>Projeto de Extensão — Mulheres no Laboratório · 2025</span>
+        </div>
+    </footer>
+
+    <!-- ── MODAL ── -->
+    <div id="image-modal" class="modal">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <button class="modal-prev" onclick="changeImage(-1)">&#10094;</button>
+        <div class="modal-body">
+            <img class="modal-content" id="modal-img" src="" alt="">
+            <div id="modal-caption"></div>
+        </div>
+        <button class="modal-next" onclick="changeImage(1)">&#10095;</button>
+    </div>
+
+    <script>
+        /* ── MODAL ── */
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalCap = document.getElementById('modal-caption');
+
+        let images = [];
+        let currentIndex = 0;
+
+        function buildImageList() {
+            const items = document.querySelectorAll('.galeria-item img');
+            images = Array.from(items).map(img => ({ src: img.src, caption: img.alt }));
+        }
+
+        function openModal(index) {
+            buildImageList();
+            if (images.length === 0) return; // sem imagens reais ainda
+            currentIndex = index;
+            updateModal();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        window.closeModal = function () {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => { modalImg.src = ''; }, 300);
+        };
+
+        window.changeImage = function (step) {
+            currentIndex = (currentIndex + step + images.length) % images.length;
+            updateModal();
+        };
+
+        function updateModal() {
+            if (images.length === 0) return;
+            modalImg.src = images[currentIndex].src;
+            modalCap.textContent = images[currentIndex].caption;
+        }
+
+        modal.addEventListener('click', e => {
+            if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (!modal.classList.contains('active')) return;
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowRight') changeImage(1);
+            if (e.key === 'ArrowLeft') changeImage(-1);
+        });
+    </script>
+
+</body>
+
+</html>
