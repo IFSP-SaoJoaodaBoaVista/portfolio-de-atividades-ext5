@@ -4,12 +4,412 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfólios — Cultura Oceânica em Quadrinhos</title>
+  <title>Portfólios — Planeta Água e Cultura Oceânica</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="stylesheet\styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+  <style>
+    :root {
+      --ocean-deep: #0a2342;
+      --ocean-mid:  #0d4f6e;
+      --ocean-teal: #00b4d8;
+      --ocean-foam: #90e0ef;
+      --ocean-light:#caf0f8;
+      --sand:       #f5ede3;
+      --white:      #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--ocean-deep);
+      color: var(--white);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ── PARTICLES ── */
+    .bg-particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--ocean-teal);
+      opacity: 0;
+      animation: float-particle linear infinite;
+    }
+    @keyframes float-particle {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 0.15; }
+      90%  { opacity: 0.08; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(10, 35, 66, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0, 180, 216, 0.18);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ocean-foam);
+      letter-spacing: 0.02em;
+    }
+    .nav-right { display: flex; align-items: center; gap: 2rem; }
+    .nav-count {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+    }
+    .nav-count span { color: var(--ocean-teal); font-weight: 600; }
+
+    /* ── HERO ── */
+    .page-hero {
+      position: relative;
+      z-index: 1;
+      padding: 10rem 4rem 5rem;
+      text-align: center;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 60%, rgba(0,180,216,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ocean-teal);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--ocean-teal);
+    }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--ocean-foam); }
+    .page-hero p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.6);
+      max-width: 540px;
+      margin: 0 auto 1rem;
+    }
+
+    /* ── CAROUSEL SECTION ── */
+    .carousel-section {
+      position: relative;
+      z-index: 1;
+      padding: 2rem 0 5rem;
+    }
+
+    /*
+      .swiper-clip corta horizontalmente mas deixa o shadow vertical vazar.
+      Truque: overflow-x: hidden em um wrapper e overflow: visible no swiper.
+    */
+    .swiper-clip {
+      overflow: hidden;
+    }
+
+    .swiper {
+      width: 100%;
+      padding: 3rem 0 4rem !important;
+      overflow: visible !important;
+    }
+
+    /* ── SLIDES / CARDS ── */
+    .swiper-slide {
+      width: 420px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      /* estado padrão (não-ativo) */
+      transform: scale(0.86);
+      opacity: 0.45;
+      transition:
+        transform  0.5s cubic-bezier(0.25,0.8,0.25,1),
+        opacity    0.5s ease,
+        box-shadow 0.5s ease;
+    }
+    .swiper-slide-active {
+      transform: scale(1) !important;
+      opacity: 1 !important;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.07);
+    }
+    .swiper-slide-prev,
+    .swiper-slide-next {
+      transform: scale(0.93) !important;
+      opacity: 0.72 !important;
+    }
+
+    .card-inner {
+      position: relative;
+      height: 540px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .card-art {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7rem;
+      transition: transform 0.5s ease;
+    }
+    .swiper-slide-active .card-art {
+      transform: translateY(-10px) scale(1.08);
+    }
+    .card-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, var(--card-color-a) 0%, var(--card-color-b) 100%);
+    }
+    .card-noise {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .card-shine {
+      position: absolute;
+      top: 0;
+      left: -60%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.07) 50%, transparent 60%);
+      transition: left 0.6s ease;
+    }
+    .swiper-slide-active:hover .card-shine { left: 120%; }
+
+    .card-body {
+      position: relative;
+      z-index: 2;
+      padding: 2rem 2rem 2.2rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 100%);
+    }
+    .card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.28rem 0.75rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      line-height: 1.2;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .card-desc {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 1.5rem;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-members { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+    .card-members strong { color: rgba(255,255,255,0.85); }
+
+    .card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.3rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      background: var(--btn-color);
+      color: var(--ocean-deep);
+    }
+    .card-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    .card-btn.disabled {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.5);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .card-btn .arrow { transition: transform 0.2s; }
+    .card-btn:hover .arrow { transform: translateX(3px); }
+
+    .card-lock {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      z-index: 3;
+      font-size: 1.1rem;
+      opacity: 0.6;
+    }
+
+    /* ── SWIPER NAVIGATION BUTTONS ── */
+    .swiper-button-prev,
+    .swiper-button-next {
+      width: 52px !important;
+      height: 52px !important;
+      border-radius: 50% !important;
+      background: rgba(10, 35, 66, 0.7) !important;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.18) !important;
+      color: var(--white) !important;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s !important;
+      /* Swiper posiciona na metade do swiper-wrapper; ajustar para metade do card */
+      top: calc(50% - 0.5rem) !important;
+    }
+    .swiper-button-prev { left: 1.5rem !important; }
+    .swiper-button-next { right: 1.5rem !important; }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+      font-size: 1.1rem !important;
+      font-weight: 700 !important;
+    }
+    .swiper-button-prev:hover,
+    .swiper-button-next:hover {
+      background: rgba(0, 180, 216, 0.28) !important;
+      border-color: var(--ocean-teal) !important;
+    }
+
+    /* ── SWIPER PAGINATION (dots) ── */
+    .swiper-pagination {
+      bottom: 0.6rem !important;
+    }
+    .swiper-pagination-bullet {
+      width: 6px !important;
+      height: 6px !important;
+      background: rgba(255,255,255,0.25) !important;
+      opacity: 1 !important;
+      transition: all 0.3s !important;
+    }
+    .swiper-pagination-bullet-active {
+      background: var(--ocean-teal) !important;
+      width: 22px !important;
+      border-radius: 3px !important;
+    }
+
+    /* ── HINT ── */
+    .hint {
+      text-align: center;
+      margin-top: 0.6rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.28);
+      letter-spacing: 0.06em;
+    }
+    .hint kbd {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      padding: 0.1rem 0.5rem;
+      font-family: inherit;
+      font-size: 0.72rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: #030e1c;
+      padding: 2.5rem 4rem;
+      border-top: 1px solid rgba(0,180,216,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--ocean-foam);
+      font-size: 1.1rem;
+    }
+    .footer-brand span {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-style: normal;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 0.2rem;
+    }
+    .footer-note { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 2rem; }
+      .page-hero { padding: 8rem 2rem 3rem; }
+      .swiper-slide { width: 320px; }
+      .card-inner { height: 460px; }
+      .swiper-button-prev { left: 0.75rem !important; }
+      .swiper-button-next { right: 0.75rem !important; }
+    }
+    @media (max-width: 600px) {
+      .swiper-slide { width: 290px; }
+      .card-inner { height: 420px; }
+      .card-title { font-size: 1.4rem; }
+      .swiper-button-prev,
+      .swiper-button-next { width: 44px !important; height: 44px !important; }
+      .swiper-button-prev::after,
+      .swiper-button-next::after { font-size: 0.9rem !important; }
+      .swiper-button-prev { left: 0.4rem !important; }
+      .swiper-button-next { right: 0.4rem !important; }
+    }
+  </style>
 </head>
 
 <body>
@@ -19,9 +419,9 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">Cultura Oceânica em Quadrinhos</div>
+    <div class="nav-logo">Planeta Água e Cultura Oceânica</div>
     <div class="nav-right">
-      <span class="nav-count">Grupos: <span>6</span></span>
+      <span class="nav-count">Projetos: <span>11</span></span>
     </div>
   </nav>
 
@@ -29,149 +429,18 @@
   <header class="page-hero">
     <p class="hero-eyebrow">Portfólios 2025</p>
     <h1>Uma Jornada Visual<br>pelos <em>Projetos</em></h1>
-    <p>Explore os portfólios de cada grupo e descubra como as histórias em quadrinhos podem transformar a educação
-      oceânica.</p>
+    <p>Explore os portfólios de cada grupo e descubra como seus projetos contribuem para transformar a educação oceânica no nosso Planeta.</p>
   </header>
 
   <!-- CAROUSEL -->
   <section class="carousel-section">
-    <div class="carousel-viewport">
-      <div class="carousel-track" id="track">
-
-        <!-- CARD 1 — Cultura Oceânica (ACTIVE / LINKED) -->
-        <div class="card active" data-index="0" onclick="handleClick(0)">
-          <div class="card-inner">
-            <div class="card-gradient" style="--card-color-a:#004e8c; --card-color-b:#0096c7;"></div>
-            <div class="card-noise"></div>
-            <div class="card-art">🌊</div>
-            <div class="card-shine"></div>
-            <div class="card-body">
-              <span class="card-tag">Grupo 1 · Concluído</span>
-              <h2 class="card-title">Cultura Oceânica em Quadrinhos</h2>
-              <p class="card-desc">Uma jornada visual com IA explorando os 7 Princípios da Cultura Oceânica da UNESCO.
-              </p>
-              <div class="card-footer">
-                <span class="card-members">Integrantes: <strong>Adicionar nomes</strong></span>
-                <a href="portfolio-cultura-oceanica.html" class="card-btn" style="--btn-color:#00b4d8;">
-                  Ver portfólio <span class="arrow">→</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 2 -->
-        <div class="card adjacent" data-index="1" onclick="handleClick(1)">
-          <div class="card-inner">
-            <div class="card-gradient" style="--card-color-a:#3a1c71; --card-color-b:#7b61ff;"></div>
-            <div class="card-noise"></div>
-            <div class="card-art">🔭</div>
-            <div class="card-shine"></div>
-            <span class="card-lock">🔒</span>
-            <div class="card-body">
-              <span class="card-tag">Grupo 2 · Em breve</span>
-              <h2 class="card-title">Título do Projeto 2</h2>
-              <p class="card-desc">Descrição breve do tema abordado pelo segundo grupo. Substitua com o conteúdo real.
-              </p>
-              <div class="card-footer">
-                <span class="card-members">Integrantes: <strong>—</strong></span>
-                <button class="card-btn disabled">Em breve</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 3 -->
-        <div class="card" data-index="2" onclick="handleClick(2)">
-          <div class="card-inner">
-            <div class="card-gradient" style="--card-color-a:#6b1a1a; --card-color-b:#ff6b6b;"></div>
-            <div class="card-noise"></div>
-            <div class="card-art">🌿</div>
-            <div class="card-shine"></div>
-            <span class="card-lock">🔒</span>
-            <div class="card-body">
-              <span class="card-tag">Grupo 3 · Em breve</span>
-              <h2 class="card-title">Título do Projeto 3</h2>
-              <p class="card-desc">Descrição breve do tema abordado pelo terceiro grupo. Substitua com o conteúdo real.
-              </p>
-              <div class="card-footer">
-                <span class="card-members">Integrantes: <strong>—</strong></span>
-                <button class="card-btn disabled">Em breve</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 4 -->
-        <div class="card" data-index="3" onclick="handleClick(3)">
-          <div class="card-inner">
-            <div class="card-gradient" style="--card-color-a:#0d3d2a; --card-color-b:#3ecf8e;"></div>
-            <div class="card-noise"></div>
-            <div class="card-art">🐋</div>
-            <div class="card-shine"></div>
-            <span class="card-lock">🔒</span>
-            <div class="card-body">
-              <span class="card-tag">Grupo 4 · Em breve</span>
-              <h2 class="card-title">Título do Projeto 4</h2>
-              <p class="card-desc">Descrição breve do tema abordado pelo quarto grupo. Substitua com o conteúdo real.
-              </p>
-              <div class="card-footer">
-                <span class="card-members">Integrantes: <strong>—</strong></span>
-                <button class="card-btn disabled">Em breve</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 5 -->
-        <div class="card" data-index="4" onclick="handleClick(4)">
-          <div class="card-inner">
-            <div class="card-gradient" style="--card-color-a:#6b4f00; --card-color-b:#f4c542;"></div>
-            <div class="card-noise"></div>
-            <div class="card-art">☀️</div>
-            <div class="card-shine"></div>
-            <span class="card-lock">🔒</span>
-            <div class="card-body">
-              <span class="card-tag">Grupo 5 · Em breve</span>
-              <h2 class="card-title">Título do Projeto 5</h2>
-              <p class="card-desc">Descrição breve do tema abordado pelo quinto grupo. Substitua com o conteúdo real.
-              </p>
-              <div class="card-footer">
-                <span class="card-members">Integrantes: <strong>—</strong></span>
-                <button class="card-btn disabled">Em breve</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 6 -->
-        <div class="card" data-index="5" onclick="handleClick(5)">
-          <div class="card-inner">
-            <div class="card-gradient" style="--card-color-a:#6b2d00; --card-color-b:#ff9f43;"></div>
-            <div class="card-noise"></div>
-            <div class="card-art">🐠</div>
-            <div class="card-shine"></div>
-            <span class="card-lock">🔒</span>
-            <div class="card-body">
-              <span class="card-tag">Grupo 6 · Em breve</span>
-              <h2 class="card-title">Título do Projeto 6</h2>
-              <p class="card-desc">Descrição breve do tema abordado pelo sexto grupo. Substitua com o conteúdo real.</p>
-              <div class="card-footer">
-                <span class="card-members">Integrantes: <strong>—</strong></span>
-                <button class="card-btn disabled">Em breve</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /track -->
-    </div><!-- /viewport -->
-
-    <!-- controls -->
-    <div class="carousel-controls">
-      <button class="ctrl-btn" id="prevBtn" onclick="move(-1)" aria-label="Anterior">←</button>
-      <div class="dots" id="dots"></div>
-      <button class="ctrl-btn" id="nextBtn" onclick="move(1)" aria-label="Próximo">→</button>
+    <div class="swiper-clip">
+      <div class="swiper" id="portfolioSwiper">
+        <div class="swiper-wrapper" id="swiperWrapper"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
+      </div>
     </div>
     <p class="hint">Use as setas do teclado <kbd>←</kbd> <kbd>→</kbd> ou arraste para navegar</p>
   </section>
@@ -179,11 +448,14 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-brand">
-      Cultura Oceânica em Quadrinhos
+      Planeta Água e Cultura Oceânica
       <span>Portfólios Educacionais · 2025</span>
     </div>
-    <p class="footer-note">Template — personalize com os dados reais de cada grupo</p>
+    <p class="footer-note">Aventure-se nos projetos criados pelos alunos do IFSP-SBV</p>
   </footer>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <script>
     /* ── PARTICLES ── */
@@ -193,130 +465,167 @@
         const p = document.createElement('div');
         p.className = 'particle';
         const size = Math.random() * 6 + 3;
-        p.style.cssText = `
-        width: ${size}px; height: ${size}px;
-        left: ${Math.random() * 100}%;
-        animation-duration: ${Math.random() * 18 + 12}s;
-        animation-delay: ${Math.random() * 12}s;
-      `;
+        p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;animation-duration:${Math.random()*18+12}s;animation-delay:${Math.random()*12}s;`;
         container.appendChild(p);
       }
     })();
 
-    /* ── CAROUSEL ── */
-    const TOTAL = 6;
-    let current = 0;
-    let startX = 0, isDragging = false, dragDelta = 0;
-
-    const track = document.getElementById('track');
-    const dotsEl = document.getElementById('dots');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const cards = Array.from(document.querySelectorAll('.card'));
-
-    // build dots
-    for (let i = 0; i < TOTAL; i++) {
-      const d = document.createElement('div');
-      d.className = 'dot' + (i === 0 ? ' active' : '');
-      d.addEventListener('click', () => goTo(i));
-      dotsEl.appendChild(d);
-    }
-
-    function cardWidth() {
-      return cards[0].getBoundingClientRect().width + 32; // +gap
-    }
-
-    function getOffset(idx) {
-      const vw = window.innerWidth;
-      const cw = cardWidth();
-      return idx * cw - (vw - cw) / 2;
-    }
-
-    function render(idx, animated = true) {
-      if (!animated) track.style.transition = 'none';
-      else track.style.transition = 'transform 0.55s cubic-bezier(0.25,0.8,0.25,1)';
-
-      track.style.transform = `translateX(${-getOffset(idx)}px)`;
-
-      cards.forEach((c, i) => {
-        c.classList.remove('active', 'adjacent');
-        if (i === idx) c.classList.add('active');
-        else if (Math.abs(i - idx) === 1) c.classList.add('adjacent');
-      });
-
-      document.querySelectorAll('.dot').forEach((d, i) => {
-        d.classList.toggle('active', i === idx);
-      });
-
-      prevBtn.disabled = idx === 0;
-      nextBtn.disabled = idx === TOTAL - 1;
-    }
-
-    function goTo(idx) {
-      current = Math.max(0, Math.min(TOTAL - 1, idx));
-      render(current);
-    }
-
-    function move(dir) { goTo(current + dir); }
-
-    // click on card to focus
-    function handleClick(idx) {
-      if (idx !== current) {
-
-        goTo(idx);
-        return;
+    /* ── CARD DATA ── */
+    const CARDS_DATA = [
+      {
+        colorA: '#004e8c', colorB: '#0096c7', art: '🌊',
+        tag: 'Grupo 1 · Concluído',
+        title: 'Cultura Oceânica em Quadrinhos',
+        desc: 'Uma jornada visual com IA explorando os 7 Princípios da Cultura Oceânica da UNESCO.',
+        members: 'Adicionar nomes', link: 'portfolio-cultura-oceanica.html', btnColor: '#00b4d8', locked: false
+      },
+      {
+        colorA: '#3a1c71', colorB: '#7b61ff', art: '🔭',
+        tag: 'Grupo 2 · Em breve', title: 'Título do Projeto 2',
+        desc: 'Descrição breve do tema abordado pelo segundo grupo. Substitua com o conteúdo real.',
+        members: '—', link: null, locked: true
+      },
+      {
+        colorA: '#6b1a1a', colorB: '#ff6b6b', art: '🌿',
+        tag: 'Grupo 3 · Em breve', title: 'Título do Projeto 3',
+        desc: 'Descrição breve do tema abordado pelo terceiro grupo. Substitua com o conteúdo real.',
+        members: '—', link: null, locked: true
+      },
+      {
+        colorA: '#0d3d2a', colorB: '#3ecf8e', art: '🐋',
+        tag: 'Grupo 4 · Em breve', title: 'Título do Projeto 4',
+        desc: 'Descrição breve do tema abordado pelo quarto grupo. Substitua com o conteúdo real.',
+        members: '—', link: null, locked: true
+      },
+      {
+        colorA: '#6b4f00', colorB: '#f4c542', art: '☀️',
+        tag: 'Grupo 5 · Em breve', title: 'Título do Projeto 5',
+        desc: 'Descrição breve do tema abordado pelo quinto grupo. Substitua com o conteúdo real.',
+        members: '—', link: null, locked: true
+      },
+      {
+        colorA: '#6b2d00', colorB: '#ff9f43', art: '🐠',
+        tag: 'Grupo 6 · Em breve', title: 'Título do Projeto 6',
+        desc: 'Descrição breve do tema abordado pelo sexto grupo. Substitua com o conteúdo real.',
+        members: '—', link: null, locked: true
+      },
+      {
+        colorA: '#1a0a4a', colorB: '#9b5de5', art: '🪸',
+        tag: 'Grupo 7 · Em breve', title: 'Título do Projeto 7',
+        desc: 'Descrição breve do tema abordado pelo sétimo grupo. Substitua com o conteúdo real.',
+        members: '—', link: null, locked: true
+      },
+      {
+        colorA: '#003333', colorB: '#00f5d4', art: '🐬',
+        tag: 'Grupo 8 · Em breve', title: 'Título do Projeto 8',
+        desc: 'Descrição breve do tema abordado pelo oitavo grupo. Substitua com o conteúdo real.',
+        members: '—', link: null, locked: true
+      },
+      {
+        colorA: '#2d0a3e', colorB: '#f15bb5', art: '🦑',
+        tag: 'Grupo 9 · Em breve', title: 'Título do Projeto 9',
+        desc: 'Descrição breve do tema abordado pelo nono grupo. Substitua com o conteúdo real.',
+        members: '—', link: null, locked: true
+      },
+      {
+        colorA: '#0a2e0a', colorB: '#55a630', art: '🌍',
+        tag: 'Grupo 10 · Em breve', title: 'Título do Projeto 10',
+        desc: 'Descrição breve do tema abordado pelo décimo grupo. Substitua com o conteúdo real.',
+        members: '—', link: null, locked: true
+      },
+      {
+        colorA: '#3d1515', colorB: '#e63946', art: '🦈',
+        tag: 'Grupo 11 · Em breve', title: 'Título do Projeto 11',
+        desc: 'Descrição breve do tema abordado pelo décimo primeiro grupo. Substitua com o conteúdo real.',
+        members: '—', link: null, locked: true
       }
-      // if already active & has a link — follow it
-      const link = cards[idx].querySelector('a.card-btn');
+    ];
 
-      if (link) {
-        window.location.href = link.href;
-      }
-    }
+    /* ── BUILD SLIDES ── */
+    const wrapper = document.getElementById('swiperWrapper');
 
-    // keyboard
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft') move(-1);
-      if (e.key === 'ArrowRight') move(1);
+    CARDS_DATA.forEach(d => {
+      const btn = d.link
+        ? `<a href="${d.link}" class="card-btn" style="--btn-color:${d.btnColor};">Ver portfólio <span class="arrow">→</span></a>`
+        : `<button class="card-btn disabled">Em breve</button>`;
+      const lock = d.locked ? `<span class="card-lock">🔒</span>` : '';
+
+      const slide = document.createElement('div');
+      slide.className = 'swiper-slide';
+      slide.innerHTML = `
+        <div class="card-inner">
+          <div class="card-gradient" style="--card-color-a:${d.colorA};--card-color-b:${d.colorB};"></div>
+          <div class="card-noise"></div>
+          <div class="card-art">${d.art}</div>
+          <div class="card-shine"></div>
+          ${lock}
+          <div class="card-body">
+            <span class="card-tag">${d.tag}</span>
+            <h2 class="card-title">${d.title}</h2>
+            <p class="card-desc">${d.desc}</p>
+            <div class="card-footer">
+              <span class="card-members">Integrantes: <strong>${d.members}</strong></span>
+              ${btn}
+            </div>
+          </div>
+        </div>`;
+      wrapper.appendChild(slide);
     });
 
-    // drag / swipe
-    track.addEventListener('mousedown', e => {
-      isDragging = true; startX = e.clientX;
-      track.style.transition = 'none';
-    });
-    document.addEventListener('mousemove', e => {
-      if (!isDragging) return;
-      dragDelta = e.clientX - startX;
-      track.style.transform = `translateX(${-getOffset(current) + dragDelta}px)`;
-    });
-    document.addEventListener('mouseup', () => {
-      if (!isDragging) return;
-      isDragging = false;
-      if (dragDelta < -60) move(1);
-      else if (dragDelta > 60) move(-1);
-      else render(current);
-      dragDelta = 0;
-    });
+    /* ── SWIPER INIT ── */
+    const swiper = new Swiper('#portfolioSwiper', {
+      // Layout: largura automática (respeita o width do .swiper-slide no CSS)
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      spaceBetween: 32,
 
-    track.addEventListener('touchstart', e => {
-      startX = e.touches[0].clientX;
-      track.style.transition = 'none';
-    }, { passive: true });
-    track.addEventListener('touchmove', e => {
-      dragDelta = e.touches[0].clientX - startX;
-      track.style.transform = `translateX(${-getOffset(current) + dragDelta}px)`;
-    }, { passive: true });
-    track.addEventListener('touchend', () => {
-      if (dragDelta < -50) move(1);
-      else if (dragDelta > 50) move(-1);
-      else render(current);
-      dragDelta = 0;
-    });
+      // Loop infinito nativo — o Swiper duplica os slides internamente,
+      // sem setTimeout nem tricks de reflow.
+      loop: true,
 
-    // init & resize
-    render(0, false);
-    window.addEventListener('resize', () => render(current, false));
+      // Velocidade da animação em ms
+      speed: 550,
+
+      // Cursor de arrastar
+      grabCursor: true,
+
+      // Navegação por teclado
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
+
+      // Botões prev / next
+      navigation: {
+        prevEl: '.swiper-button-prev',
+        nextEl: '.swiper-button-next',
+      },
+
+      // Paginação com dots clicáveis
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+
+      // Clique em slide não-ativo centraliza; clique no ativo abre o link
+      on: {
+        click(swiper) {
+          const clicked = swiper.clickedSlide;
+          if (!clicked) return;
+
+          const isActive = clicked.classList.contains('swiper-slide-active');
+          if (isActive) {
+            // Slide ativo clicado → segue o link do portfólio, se houver
+            const link = clicked.querySelector('a.card-btn');
+            if (link) window.location.href = link.href;
+          } else {
+            // Slide lateral clicado → navega até ele
+            const idx = swiper.clickedIndex;
+            if (idx !== undefined) swiper.slideToLoop(swiper.slides[idx].getAttribute('data-swiper-slide-index') * 1);
+          }
+        },
+      },
+    });
   </script>
 </body>
 
