@@ -716,17 +716,11 @@
     .video-player {
       border-radius: 12px;
       overflow: hidden;
-      background: rgba(0, 0, 0, 0.4);
       border: 1px solid rgba(0, 180, 216, 0.3);
       aspect-ratio: 16/9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       position: relative;
-      cursor: pointer;
+      /* ← iframe absolute precisa disso */
       transition: border-color 0.3s;
-      text-decoration: none;
     }
 
     .video-player:hover {
@@ -1117,18 +1111,14 @@
           Assista ao vídeo de demonstração do Operação Aquapura, mostrando o gameplay completo — a mecânica de coleta de
           lixo, o sistema de oxigênio e a identidade visual do jogo.
         </p>
-        <a href="https://youtu.be/CWikVOfFT9Y?si=snNHkJLCMFi-BiH6" target="_blank" class="btn btn-primary">Abrir
-          Vídeo</a>
       </div>
-      <a href="https://youtu.be/CWikVOfFT9Y?si=snNHkJLCMFi-BiH6" target="_blank" class="video-player">
-        <img src="https://img.youtube.com/vi/CWikVOfFT9Y/maxresdefault.jpg" alt="Thumbnail do vídeo"
-          style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.6;">
-        <div class="video-label">▶ YouTube</div>
-        <div class="video-overlay">
-          <div class="play-btn">▶</div>
-          <p class="video-caption">Clique para assistir no YouTube</p>
-        </div>
-      </a>
+      <div class="video-player">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/CWikVOfFT9Y"
+          title="Operação Aquapura - Gameplay" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen style="position:absolute; inset:0; width:100%; height:100%;">
+        </iframe>
+      </div>
     </div>
   </section>
 

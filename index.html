@@ -200,7 +200,7 @@
 
     /* ── SLIDES / CARDS ── */
     .swiper-slide {
-      width: 420px;
+      width: 340px;
       border-radius: 18px;
       overflow: hidden;
       position: relative;
@@ -231,7 +231,19 @@
       height: 540px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: flex-start;
+    }
+
+    .card-inner::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 45%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 1;
     }
 
     .card-art {
@@ -241,11 +253,14 @@
       align-items: center;
       justify-content: center;
       font-size: 7rem;
+      opacity: 0.30;
+      z-index: 1;
       transition: transform 0.5s ease;
     }
 
     .swiper-slide-active .card-art {
       transform: translateY(-10px) scale(1.08);
+      opacity: 0.50;
     }
 
     .card-gradient {
@@ -279,7 +294,6 @@
       position: relative;
       z-index: 2;
       padding: 2rem 2rem 2rem;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, transparent 100%);
     }
 
     .card-tag {
@@ -313,13 +327,22 @@
 
     .card-footer {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem 1rem;
     }
 
     .card-members {
       font-size: 0.78rem;
       color: rgba(255, 255, 255, 0.5);
+      flex: 1 1 140px;
+      min-width: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .card-members strong {
@@ -327,6 +350,8 @@
     }
 
     .card-btn {
+      flex-shrink: 0;
+      align-self: flex-end;
       display: inline-flex;
       align-items: center;
       white-space: nowrap;
@@ -490,7 +515,7 @@
       }
 
       .swiper-slide {
-        width: 320px;
+        width: 280px;
       }
 
       .card-inner {
@@ -508,7 +533,7 @@
 
     @media (max-width: 600px) {
       .swiper-slide {
-        width: 290px;
+        width: 250px;
       }
 
       .card-inner {
@@ -603,7 +628,7 @@
     /* ── CARD DATA ── */
     const CARDS_DATA = [
       {
-        colorA: '#E3F2FD', colorB: '#0096c7', art: '🌊',
+        colorA: '#3df8ff', colorB: '#0096c7', art: '🌊',
         tag: 'Grupo 1',
         title: 'Cultura Oceânica em Quadrinhos',
         desc: 'Uma jornada visual com IA explorando os 7 Princípios da Cultura Oceânica da UNESCO.',
@@ -612,7 +637,7 @@
         btnColor: '#00b4d8', locked: false
       },
       {
-        colorA: '#252BB8', colorB: '#7b61ff', art: '🪼',
+        colorA: '#252BB8', colorB: '#7b61ff', art: '⛵',
         tag: 'Grupo 2',
         title: 'Navegando pela ODS 14',
         desc: 'Uma jornada visual criada com IA para educar e inspirar a consciência ambiental marinha nas escolas brasileiras.',
@@ -625,7 +650,7 @@
         tag: 'Grupo 3',
         title: 'Cultura Oceânica em Cartaz',
         desc: 'Cartazes criados com Inteligência Artificial para engajar estudantes na preservação dos oceanos.',
-        members: 'Ana Julia Romera, João Vitor Gregorio, Leticia Rosa Teles, Mel Heloise Zaninelli, Raissa Figueiredo, Rebeca Regina Papa',
+        members: 'Ana Julia, João Gregorio, Leticia Rosa, Mel Heloise, Raissa Figueiredo, Rebeca Laia',
         link: 'grupo 3/portfolio-cultura-oceanica-cartaz.html',
         btnColor: '#ff6b6b', locked: false
       },
@@ -642,7 +667,7 @@
         colorA: '#42A5F5', colorB: '#f4c542', art: '🏵️',
         tag: 'Grupo 5',
         title: 'Inteligência Artificial & Cultura Oceânica',
-        desc: 'Do laboratório à praia — a IA conecta conhecimento e ação em folhetos sobre a vida marinha.',
+        desc: 'Do laboratório à praia - a IA conecta conhecimento e ação em folhetos sobre a vida marinha.',
         members: 'Caio Canalli, Davi Beli, Filipe Fiorio, Gustavo Mastelaro, João Davi, Paulo Henrique, Rodrigo Garcia',
         link: 'grupo 5/ProjetoFolheto/portfolio-panfleto.html',
         btnColor: '#f4c542', locked: false
@@ -652,12 +677,12 @@
         tag: 'Grupo 6',
         title: 'Operação Aquapura',
         desc: 'Um jogo arcade para conscientizar sobre a poluição dos oceanos de forma intuitiva e divertida, alinhado ao ODS 14.',
-        members: 'Alisson da Silva Sales, Bianca Tordivelli Carrer, Guilherme Gonçalves Diniz de Barros, Kevin Kaito Okada, Lucas Carrion Macedo, Lucas Fabiano da Costa Domingos, Mari Diniz Oliveira de Souza, Pedro Vinicius Lima dos Santos, Raul Pierre Congiu Peres, Thiago Martins Araujo',
+        members: 'Alisson Sales, Bianca Carrer, Guilherme Diniz, Kevin Kaito, Lucas Macedo, Lucas Domingos, Mari Diniz, Pedro Vinicius, Raul Pierre, Thiago Martins',
         link: 'grupo 1/quadrinho/portifolio-aquapura.html',
         btnColor: '#ff9f43', locked: false
       },
       {
-        colorA: '#1E88E5', colorB: '#9b5de5', art: '🪸',
+        colorA: '#1E88E5', colorB: '#9b5de5', art: '🎮',
         tag: 'Grupo 7',
         title: 'QuizMaker Educacional',
         desc: 'Ferramenta para criar e responder quizzes interativos, gamificando o aprendizado em sala de aula.',
@@ -670,7 +695,7 @@
         tag: 'Grupo 8',
         title: 'Do Frasco à Descoberta',
         desc: 'Atividade gamificada que valoriza mulheres na ciência por meio de uma simulação interativa de laboratório.',
-        members: '—',
+        members: 'Fernanda Chen, Gleyce Kelly, Milena Cristina, Sofia Barros, Yoná Maia',
         link: 'grupo 5/ProjetoFolheto/portifolio-Do-Frasco-a-Descoberta.html',
         btnColor: '#00f5d4', locked: false
       },
@@ -685,7 +710,7 @@
         colorA: '#0D47A1', colorB: '#55a630', art: '🌍',
         tag: 'Grupo 10', title: 'Oficina de Microvídeos',
         desc: 'Uma oficina que aborda todas as etapas da criação de vídeos sobre educação marinha',
-        members: 'Arthur, Eduardo, Evelyn, Fernando, Maria, Rogério, Thiago', link: 'grupo 6/portfolio-cultura-oceanica.html', 
+        members: 'Arthur, Eduardo, Evelyn, Fernando, Maria, Rogério, Thiago', link: 'grupo 6/portfolio-cultura-oceanica.html',
         btnColor: '#55a630', locked: false
       }
     ];
